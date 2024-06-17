@@ -24,8 +24,10 @@ get68proc = function(cache=BiocFileCache::BiocFileCache(),
  zippath = "https://mghp.osn.xsede.org/bir190004-bucket01/BiocMatrixGenerics/pbmc68kproc.zip"
  ent = BiocFileCache::bfcquery(cache, "pbmc68kproc.zip")
  if (nrow(ent)==0) {
-   chkdl = yesno::yesno("This will download 840MB to your cache.  Proceed?")
-   if (!chkdl) stop("download refused.")
+   if (interactive()) {
+     chkdl = yesno::yesno("This will download 840MB to your cache.  Proceed?")
+     if (!chkdl) stop("download refused.")
+     }
    ent = BiocFileCache::bfcadd(cache, rname=zippath, action="copy")
    }
  refresh = BiocFileCache::bfcquery(cache, "pbmc68kproc.zip")
