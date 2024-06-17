@@ -63,7 +63,7 @@ example(get68proc)  # defines `tst`
 
 Here we profile a colSums operation.  Scroll over the
 boxes in the profvis output to see functions called
-in time slices.  The Data tabe provides an expandable
+in time slices.  The Data tab provides an expandable
 tree of symbols used.
 
 ```{r lkp1,message=FALSE}
