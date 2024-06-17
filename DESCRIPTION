@@ -16,9 +16,9 @@ License: Artistic-2.0
 Encoding: UTF-8
 Depends: R (>= 4.1), SingleCellExperiment
 Imports: yesno, HDF5Array, BiocFileCache, rhdf5
-Suggests: knitr, testthat, BiocStyle, DelayedArray
+Suggests: knitr, testthat, BiocStyle, DelayedArray, profvis
 VignetteBuilder: knitr
 biocViews: Infrastructure
 RoxygenNote: 7.3.1
-URL:
-BugReports:
+URL: https://github.com/vjcitn/BiocMatQuant
+BugReports: https://github.com/vjcitn/BiocMatQuant/issues

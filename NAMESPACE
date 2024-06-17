@@ -3,5 +3,6 @@
 export(get68proc)
 import(BiocFileCache)
 import(HDF5Array)
+import(SingleCellExperiment)
 import(utils)
 import(yesno)

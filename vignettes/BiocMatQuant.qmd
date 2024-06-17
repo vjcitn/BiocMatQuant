@@ -1,0 +1,75 @@
+---
+title: "Assessing matrix representations and operations in Bioconductor"
+title-short: "BiocMatQuant"
+vignette: >
+  %\VignetteIndexEntry{BiocMatQuant}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
+format: html
+toc: true
+editor_options:
+  chunk_output_type: console
+---
+
+# Introduction
+
+We'll examine performance of different options for working
+with matrices in Bioconductor.  Some topics of interest:
+
+- choice and layout of disk-backed representations
+    - HDF5
+    - TileDb
+    - zarr
+- approaches to sparse representations and their use
+
+# Example: 68000 PBMCs
+
+## Setup
+
+We used TENxPBMCData as follows:
+```
+# code is not run in vignette
+library(TENxPBMCData)
+p68 = TENxPBMCData("pbmc68k")
+rownames(p68) = make.names(rowData(p68)$Symbol_TENx, unique=TRUE)
+library(scater)
+library(scran)
+p68 = logNormCounts(p68)
+library(celldex)
+hpca = HumanPrimaryCellAtlasData()
+library(SingleR)
+library(BiocParallel)
+myb = MulticoreParam(6)
+p68s = SingleR(p68, hpca, hpca$label.main, BPPARAM=myb)
+```
+The labels from `p68s` were added back to `colData(p68)`.
+`runPCA` was also performed to update `p68`.  This was then
+saved using `HDF5Array::saveHDF5SummarizedExperiment`.
+The resulting folder was zipped and placed in an Open
+Storage Network bucket.
+
+## Extracting SCE from cache
+
+The `get68proc()` will populate the BiocFileCache if necessary,
+withdrawing the SCE.  If the SCE is not found in cache, the
+user is asked whether to proceed with an 835MB download.
+
+```{r lk1,message=FALSE}
+library(BiocMatQuant)
+example(get68proc)  # defines `tst`
+```
+
+## colSums performance sketch
+
+Here we profile a colSums operation.  Scroll over the
+boxes in the profvis output to see functions called
+in time slices.  The Data tabe provides an expandable
+tree of symbols used.
+
+```{r lkp1,message=FALSE}
+library(profvis)
+library(MatrixGenerics)
+p = profvis({ cs <- colSums(assay(tst[,1:15000])) })
+summary(cs)
+p
+```

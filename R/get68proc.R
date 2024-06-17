@@ -2,6 +2,7 @@
 #' obtain a SingleCellExperiment with a version of TENxPBMCData pbmc68k data
 #' @import yesno
 #' @import BiocFileCache
+#' @import SingleCellExperiment
 #' @import utils
 #' @import HDF5Array
 #' @note An 835MB zipfile holding the output of saveHDF5SummarizedExperiment is retrieved
