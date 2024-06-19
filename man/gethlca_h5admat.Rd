@@ -23,6 +23,8 @@ from Open Storage Network and placed in cache.  HDF5Array::H5ADMatrix
 is then used to acquire a reference that is returned.
 }
 \examples{
-x = gethlca_h5admat()
-try(x[1:4,1:5])
+if (interactive()) {   # not for github actions, yet
+ x = gethlca_h5admat()
+ try(x[1:4,1:5])
+}
 }

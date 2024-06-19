@@ -16,7 +16,7 @@ License: Artistic-2.0
 Encoding: UTF-8
 Depends: R (>= 4.1), SingleCellExperiment
 Imports: yesno, HDF5Array, BiocFileCache, rhdf5
-Suggests: knitr, testthat, BiocStyle, DelayedArray, profvis, quarto
+Suggests: knitr, testthat, BiocStyle, DelayedArray, profvis, quarto,
 	SparseArray
 VignetteBuilder: quarto
 biocViews: Infrastructure

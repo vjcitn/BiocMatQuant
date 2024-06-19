@@ -14,8 +14,10 @@
 #' @return Instance of HDF5Array::H5ADMatrix, which has more than 2^31-1
 #' non-zero elements, and may be difficult to manipulate.
 #' @examples
-#' x = gethlca_h5admat()
-#' try(x[1:4,1:5])
+#' if (interactive()) {   # not for github actions, yet
+#'  x = gethlca_h5admat()
+#'  try(x[1:4,1:5])
+#' }
 #' @export
 gethlca_h5admat = function(cache=BiocFileCache::BiocFileCache()) {
  h5adpath = "https://mghp.osn.xsede.org/bir190004-bucket01/BiocHLCA/hlca.h5ad"
